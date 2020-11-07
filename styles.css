@@ -1,11 +1,12 @@
 /* body section */
 body {
   display: flex;
+  background: #22333B;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  height: 100vh;
-  border: 0;
+  height: 100%;
+  width: 100%;
   font-family: sans-serif;
 }
 
@@ -23,22 +24,11 @@ body {
   color: #22333B;
 }
 
-tr {
-  /* delete next line */
-  background: red;
-}
-
-td:hover {
+div:hover {
   cursor: pointer;
 }
 
-/* td {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
-article {
+.game-board {
   background: #22333B;
   display: flex;
   flex-direction: row;
@@ -57,14 +47,6 @@ div {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#game-board {
-  height: 70%;
-  width: 94%;
-  /* delete next line */
-  background: #22333B;
-  margin-bottom: 12%;
 }
 
 .heading {
