@@ -10,9 +10,15 @@ body {
   font-family: sans-serif;
 }
 
+.heading {
+  margin-top: 4em;
+}
 
 /* game section */
-#game-area {
+button {
+  
+}
+.game-area {
   background: #FFDAE0;
   display: flex;
   flex-direction: column;
@@ -49,11 +55,7 @@ div {
   align-items: center;
 }
 
-.heading {
-  margin-top: 4em;
-}
-
-.game-piece {
+.game-space {
   font-size: 8em;
 
 }
