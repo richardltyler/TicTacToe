@@ -17,8 +17,10 @@ body {
 
 /* game section */
 button {
-
+  background: #22333B;
+  color: white;
 }
+
 .game-area {
   background: #FFDAE0;
   display: flex;
