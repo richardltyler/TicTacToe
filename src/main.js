@@ -1,20 +1,24 @@
 var turnHeading = document.querySelector('#game-heading');
-var gameSpace = document.querySelectorAll('.game-space');
+var gameSpaces = document.querySelectorAll('.game-space');
 var beginButton = document.querySelector('button');
 var currentPlayer;
 var player1 = new Player('X', true);
 var player2 = new Player('Ｏ', false);
 
 beginButton.addEventListener('click', startGame);
-for (var i = 0; i < gameSpace.length; i ++) {
-  gameSpace[i].addEventListener('click', displayToken);
+
+for (var i = 0; i < gameSpaces.length; i ++) {
+  gameSpaces[i].addEventListener('click', displayToken);
 }
 
 function startGame() {
   var game = new Game(player1, player2);
   currentPlayer = player1;
+  clearBoard();
   displayTurn(currentPlayer);
 }
+
+
 
 function displayTurn(player) {
   var playerToken = player.token
