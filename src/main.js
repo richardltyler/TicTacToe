@@ -18,7 +18,11 @@ function startGame() {
   displayTurn(currentPlayer);
 }
 
-
+function clearBoard() {
+  for (var i = 0; i < gameSpaces.length; i++) {
+    gameSpaces[i].innerText = '';
+  }
+}
 
 function displayTurn(player) {
   var playerToken = player.token
