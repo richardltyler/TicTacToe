@@ -1,6 +1,8 @@
 var gameHeading = document.querySelector('#game-heading');
 var gameSpaces = document.querySelectorAll('.game-space');
 var beginButton = document.querySelector('button');
+var player1wins = document.querySelector('.player-one');
+var player2wins = document.querySelector('.player-two');
 var currentPlayer;
 var game;
 var player1 =  new Player('X');
@@ -16,17 +18,12 @@ function startGame() {
   createGame();
   clearBoard();
   displayTurn(currentPlayer);
+  displayWins();
 }
 
 function createGame() {
   game = new Game(player1, player2);
   assignSpaceId();
-  toggleTurn();
-}
-
-function createPlayers(player, otherPlayer) {
-  player1 = player;
-  player2 = otherPlayer;
   toggleTurn();
 }
 
@@ -73,6 +70,7 @@ function checkGameStatus() {
   var status = game.winGame(currentPlayer);
   if (status === true) {
     displayMessage(`${currentPlayer.token} wins!`);
+    displayWins();
   } else if (status === false) {
     displayMessage(`It's a tie!`);
   } else {
@@ -84,6 +82,8 @@ function displayMessage(message) {
   gameHeading.innerText = message;
 }
 
-// function displayWins() {
-//
-// }
+function displayWins() {
+  player1wins.innerText = `${player1.winCount} WINS`;
+  player2wins.innerText = `${player2.winCount} WINS`;
+}
+// don't forget that you can still add tokens after game has finished
