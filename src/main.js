@@ -16,6 +16,7 @@ function startGame() {
   currentPlayer = player1;
   clearBoard();
   displayTurn(currentPlayer);
+  assignSpaceId();
 }
 
 function clearBoard() {
@@ -29,6 +30,17 @@ function displayTurn(player) {
   turnHeading.innerText = `It's ${playerToken}'s turn!`;
 }
 
+function assignSpaceId() {
+  for (var i = 0; i < gameSpaces.length; i++) {
+    gameSpaces[i].id = `${i}`;
+  }
+}
+
+function displayToken(event) {
+  event.target.innerText =  currentPlayer.token;
+  toggleTurn();
+}
+
 function toggleTurn() {
   if (player1.isTurn === false) {
     player1.isTurn = true;
@@ -39,10 +51,6 @@ function toggleTurn() {
     player2.isTurn = true;
     currentPlayer = player2;
   }
-  displayTurn(currentPlayer);
-}
 
-function displayToken() {
-  event.target.innerText =  currentPlayer.token;
-  toggleTurn();
+  displayTurn(currentPlayer);
 }
