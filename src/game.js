@@ -12,7 +12,7 @@ class Game {
         [1, 4, 7],
         [2, 5, 8],
         [2, 4, 6],
-        [0, 5, 8],
+        [0, 4, 8],
       ];
   }
 
@@ -21,16 +21,19 @@ class Game {
   }
 
   winGame(player) {
-  for (var i = 0; i < this.winningSequences.length; i++) {
-    var sequence = this.winningSequences[i];
-    var playerSpaces = player.spaces;
-    if (playerSpaces.includes(sequence[0]) && playerSpaces.includes(sequence[1]) && playerSpaces.includes(sequence[2])) {
-      return true;
-    } else if (!this.gameBoard.includes(null)) {
-      
+    var token = player.token;
+    var board = this.gameBoard;
+    for (var i = 0; i < this.winningSequences.length; i++) {
+      var space = this.winningSequences[i];
+      if (token === board[space[0]] && token === board[space[1]] && token === board[space[2]]) {
+
+        return true;
+      } else if (!this.gameBoard.includes(null)) {
+        return 'draw';
+      }
     }
   }
-}
+
   saveGameBoard() {
 
   }
