@@ -37,12 +37,15 @@ function assignSpaceId() {
 }
 
 function displayToken(event) {
-  event.target.innerText =  currentPlayer.token;
-  assignSpaceToPlayer(event);
-  toggleTurn();
+  var space = event.target;
+  if (!space.innerText) {
+    space.innerText = currentPlayer.token;
+    claimSpaceForPlayer(event);
+    toggleTurn();
+  }
 }
 
-function assignSpaceToPlayer(event) {
+function claimSpaceForPlayer(event) {
   var parseId = parseInt(event.target.id)
   if (currentPlayer === player1) {
     player1.spaces.push(parseId);
