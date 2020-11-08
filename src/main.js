@@ -4,6 +4,7 @@ var beginButton = document.querySelector('button');
 var currentPlayer;
 var player1 = new Player('X', true);
 var player2 = new Player('Ｏ', false);
+var game;
 
 beginButton.addEventListener('click', startGame);
 
@@ -12,7 +13,7 @@ for (var i = 0; i < gameSpaces.length; i ++) {
 }
 
 function startGame() {
-  var game = new Game(player1, player2);
+  game = new Game(player1, player2);
   currentPlayer = player1;
   clearBoard();
   displayTurn(currentPlayer);
@@ -38,19 +39,21 @@ function assignSpaceId() {
 
 function displayToken(event) {
   var space = event.target;
+  var token = currentPlayer.token;
   if (!space.innerText) {
-    space.innerText = currentPlayer.token;
+    space.innerText = token;
     claimSpaceForPlayer(event);
     toggleTurn();
+    game.updateGameBoard(space.id, token);
   }
 }
 
 function claimSpaceForPlayer(event) {
-  var parseId = parseInt(event.target.id)
+  var parsedId = parseInt(event.target.id)
   if (currentPlayer === player1) {
-    player1.spaces.push(parseId);
+    player1.spaces.push(parsedId);
   } else {
-    player2.spaces.push(parseId);
+    player2.spaces.push(parsedId);
   }
 }
 
@@ -66,4 +69,8 @@ function toggleTurn() {
   }
 
   displayTurn(currentPlayer);
+}
+
+function checkForWinner() {
+  game.winGame(currentPlayer);
 }
