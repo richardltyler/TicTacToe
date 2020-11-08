@@ -26,7 +26,6 @@ class Game {
     for (var i = 0; i < this.winningSequences.length; i++) {
       var space = this.winningSequences[i];
       if (token === board[space[0]] && token === board[space[1]] && token === board[space[2]]) {
-
         return true;
       } else if (!this.gameBoard.includes(null)) {
         return 'draw';
@@ -34,7 +33,7 @@ class Game {
     }
   }
 
-  saveGameBoard() {
+  saveGameBoardToPlayer() {
 
   }
 }

@@ -1,4 +1,4 @@
-var turnHeading = document.querySelector('#game-heading');
+var gameHeading = document.querySelector('#game-heading');
 var gameSpaces = document.querySelectorAll('.game-space');
 var beginButton = document.querySelector('button');
 var currentPlayer;
@@ -15,7 +15,6 @@ for (var i = 0; i < gameSpaces.length; i ++) {
 function startGame() {
   createGame();
   clearBoard();
-  toggleTurn();
   displayTurn(currentPlayer);
   assignSpaceId();
 }
@@ -30,6 +29,7 @@ function createGame() {
 function createPlayers(player, otherPlayer) {
   player1 = player;
   player2 = otherPlayer;
+  toggleTurn();
 }
 
 function clearBoard() {
@@ -48,10 +48,12 @@ function toggleTurn() {
     player2.isTurn = true;
     currentPlayer = player2;
   }
+  displayTurn(currentPlayer);
+}
 
 function displayTurn(player) {
   var playerToken = player.token
-  turnHeading.innerText = `It's ${playerToken}'s turn!`;
+  gameHeading.innerText = `It's ${playerToken}'s turn!`;
 }
 
 function assignSpaceId() {
@@ -77,7 +79,6 @@ function claimSpaceForPlayer(event) {
   } else {
     player2.spaces.push(parsedId);
   }
-}
 
   displayTurn(currentPlayer);
 }
@@ -96,5 +97,9 @@ function checkGameStatus() {
 }
 
 function displayMessage(message) {
-  turnHeading.innerText = message;
+  gameHeading.innerText = message;
 }
+
+// function displayWins() {
+//
+// }
