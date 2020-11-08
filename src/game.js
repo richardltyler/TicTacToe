@@ -29,7 +29,7 @@ class Game {
         this.saveGameBoardToPlayer(player);
         return true;
       } else if (!this.gameBoard.includes(null)) {
-        return 'draw';
+        return false;
       }
     }
   }
