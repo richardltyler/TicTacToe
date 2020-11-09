@@ -11,7 +11,7 @@ var player2 = new Player('Ｏ');
 beginButton.addEventListener('click', startGame);
 
 for (var i = 0; i < gameSpaces.length; i ++) {
-  gameSpaces[i].addEventListener('click', displayToken);
+  gameSpaces[i].addEventListener('click', claimSpace);
 }
 
 function startGame() {
@@ -57,12 +57,18 @@ function assignSpaceId() {
   }
 }
 
+function claimSpace(event) {
+  displayToken(event);
+  game.updateGameBoard();
+  checkGameStatus();
+}
+
 function displayToken(event) {
   var space = event.target;
   if (!space.innerText) {
     space.innerText = currentPlayer.token;
-    game.updateGameBoard(space.id, currentPlayer.token);
-    checkGameStatus();
+    // game.updateGameBoard(space.id, currentPlayer.token);
+    // checkGameStatus();
   }
 }
 
@@ -86,4 +92,6 @@ function displayWins() {
   player1wins.innerText = `${player1.winCount} WINS`;
   player2wins.innerText = `${player2.winCount} WINS`;
 }
+
+
 // don't forget that you can still add tokens after game has finished
