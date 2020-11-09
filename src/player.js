@@ -3,8 +3,10 @@ class Player {
     this.id = Date.now();
     this.token = token;
     this.wins = wins || [];
-    this.isTurn = false;
-    this.spaces = [];
+    this.winCount = 0;
+  }
+  updateWinCount() {
+    this.winCount = this.wins.length;
   }
   saveWinsToStorage() {
 

@@ -1,34 +1,30 @@
 var gameHeading = document.querySelector('#game-heading');
 var gameSpaces = document.querySelectorAll('.game-space');
 var beginButton = document.querySelector('button');
+var player1wins = document.querySelector('.player-one');
+var player2wins = document.querySelector('.player-two');
 var currentPlayer;
 var game;
-var player1;
-var player2;
+var player1 =  new Player('X');
+var player2 = new Player('Ｏ');
 
 beginButton.addEventListener('click', startGame);
 
 for (var i = 0; i < gameSpaces.length; i ++) {
-  gameSpaces[i].addEventListener('click', displayToken);
+  gameSpaces[i].addEventListener('click', claimSpace);
 }
 
 function startGame() {
   createGame();
   clearBoard();
-  displayTurn(currentPlayer);
-  assignSpaceId();
+  updateGameHeading(`It's ${currentPlayer.token}'s turn!`);
+  updateWinCountDisplay();
+  toggleClickOnSpace('auto');
 }
 
 function createGame() {
-  var newPlayer1 = new Player('X');
-  var newPlayer2 = new Player('Ｏ');
-  game = new Game(newPlayer1, newPlayer2);
-  createPlayers(game.player1, game.player2);
-}
-
-function createPlayers(player, otherPlayer) {
-  player1 = player;
-  player2 = otherPlayer;
+  game = new Game(player1, player2);
+  assignSpaceId();
   toggleTurn();
 }
 
@@ -39,67 +35,73 @@ function clearBoard() {
 }
 
 function toggleTurn() {
-  if (player1.isTurn === false) {
-    player1.isTurn = true;
-    player2.isTurn = false;
-    currentPlayer = player1;
-  } else if (player1.isTurn === true) {
-    player1.isTurn = false;
-    player2.isTurn = true;
+  if(currentPlayer === player1) {
     currentPlayer = player2;
+  } else {
+    currentPlayer = player1;
   }
-  displayTurn(currentPlayer);
-}
 
-function displayTurn(player) {
-  var playerToken = player.token
-  gameHeading.innerText = `It's ${playerToken}'s turn!`;
+  updateGameHeading(`It's ${currentPlayer.token}'s turn!`);
 }
 
 function assignSpaceId() {
-  for (var i = 0; i < gameSpaces.length; i++) {
+  for (var i = 0; i < game.gameBoard.length; i++) {
     gameSpaces[i].id = `${i}`;
   }
 }
 
+function claimSpace(event) {
+  displayToken(event);
+  decideNextMove();
+}
+
 function displayToken(event) {
   var space = event.target;
-  if (!space.innerText) {
+  var status = checkGameStatus();
+  if (!space.innerText && !status) {
     space.innerText = currentPlayer.token;
-    claimSpaceForPlayer(event);
     game.updateGameBoard(space.id, currentPlayer.token);
-    checkGameStatus();
   }
 }
 
-function claimSpaceForPlayer(event) {
-  var parsedId = parseInt(event.target.id)
-  if (currentPlayer === player1) {
-    player1.spaces.push(parsedId);
-  } else {
-    player2.spaces.push(parsedId);
-  }
-
-  displayTurn(currentPlayer);
-}
-
-function checkGameStatus() {
-  var status = game.winGame(currentPlayer);
-  if (status) {
-    displayMessage(`${currentPlayer.token} wins!`);
-    clearBoard();
+function decideNextMove() {
+  var status = checkGameStatus();
+  if (status === 'win') {
+    winGame();
   } else if (status === 'draw') {
-    displayMessage(`It's a tie!`);
-    clearBoard();
+    tieGame();
   } else {
     toggleTurn();
   }
 }
 
-function displayMessage(message) {
+function checkGameStatus() {
+  var status = game.winGame(currentPlayer);
+  return status;
+}
+
+function winGame() {
+  game.saveGameBoardToPlayer(currentPlayer);
+  updateGameHeading(`${currentPlayer.token} wins!`);
+  updateWinCountDisplay();
+  toggleClickOnSpace('none');
+}
+
+
+function toggleClickOnSpace(newValue) {
+  for (var i = 0; i < gameSpaces.length; i++)
+  gameSpaces[i].style.pointerEvents = newValue;
+}
+
+function tieGame() {
+  updateDisplay(gameHeading, `It's a tie!`);
+}
+
+function updateGameHeading(message) {
   gameHeading.innerText = message;
 }
 
-// function displayWins() {
-//
-// }
+function updateWinCountDisplay() {
+  player1wins.innerText = (`${player1.winCount} WINS`);
+  player2wins.innerText = (`${player2.winCount} WINS`);
+}

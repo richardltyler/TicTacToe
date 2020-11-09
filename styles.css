@@ -60,7 +60,7 @@ div {
 
 .game-space {
   font-size: 8em;
-
+  pointer-events: none;
 }
 
 /* player section */
