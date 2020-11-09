@@ -23,12 +23,9 @@ class Game {
   winGame(player) {
     var token = player.token;
     var board = this.gameBoard;
-    // var win = false;
     for (var i = 0; i < this.winningSequences.length; i++) {
       var space = this.winningSequences[i];
       if (board[space[0]] === token && board[space[1]] === token && board[space[2]] === token) {
-        console.log('motherFucker');
-        // win = true;
         return 'win';
       }
     }

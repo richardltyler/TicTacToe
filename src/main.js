@@ -18,9 +18,14 @@ for (var i = 0; i < gameSpaces.length; i ++) {
 function startGame() {
   createGame();
   clearBoard();
+  hideButton();
   updateGameHeading(`It's ${currentPlayer.token}'s turn!`);
   updateWinCountDisplay();
   toggleClickOnSpace('auto');
+}
+
+function hideButton() {
+  beginButton.hidden = true;
 }
 
 function createGame() {

@@ -33,7 +33,7 @@ button {
   color: #22333B;
 }
 
-div:hover {
+.game-spaces:hover {
   cursor: pointer;
 }
 
@@ -46,22 +46,23 @@ div:hover {
   flex-wrap: wrap;
   height: 74%;
   width: 92%;
-  margin-top: 4%;
+  /* margin-top: 4%; */
 }
 
-div {
+ .game-space {
   background: #FFDAE0;
   height: 32.3%;
   width: 32.3%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.game-space {
   font-size: 8em;
   pointer-events: none;
 }
+
+/* .game-space {
+
+} */
 
 /* player section */
 .player-area {
