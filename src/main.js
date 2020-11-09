@@ -5,9 +5,10 @@ var player1wins = document.querySelector('.player-one');
 var player2wins = document.querySelector('.player-two');
 var currentPlayer;
 var game;
-var player1 =  new Player('player1', 'X');
-var player2 = new Player('player2', 'Ｏ');
+var player1;
+var player2;
 
+window.onLoad = createPlayers(), updateWinCountDisplay();
 beginButton.addEventListener('click', startGame);
 
 for (var i = 0; i < gameSpaces.length; i ++) {
@@ -27,6 +28,14 @@ function createGame() {
   assignSpaceId();
   toggleTurn();
 }
+
+function createPlayers() {
+  player1 = new Player('player1', 'X');
+  player2 = new Player('player2', 'Ｏ');
+  player1.retrieveWinsFromStorage();
+  player2.retrieveWinsFromStorage();
+  }
+
 
 function clearBoard() {
   for (var i = 0; i < gameSpaces.length; i++) {
