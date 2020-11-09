@@ -5,8 +5,8 @@ var player1wins = document.querySelector('.player-one');
 var player2wins = document.querySelector('.player-two');
 var currentPlayer;
 var game;
-var player1 =  new Player('X');
-var player2 = new Player('Ｏ');
+var player1 =  new Player('player1', 'X');
+var player2 = new Player('player2', 'Ｏ');
 
 beginButton.addEventListener('click', startGame);
 

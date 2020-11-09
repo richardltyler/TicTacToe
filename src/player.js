@@ -1,6 +1,6 @@
 class Player {
-  constructor(token, wins) {
-    this.id = Date.now();
+  constructor(name, token, wins) {
+    this.name = name;
     this.token = token;
     this.wins = wins || [];
     this.winCount = 0;
@@ -8,10 +8,16 @@ class Player {
   updateWinCount() {
     this.winCount = this.wins.length;
   }
+
   saveWinsToStorage() {
-
+    var stringifiedWins = JSON.stringify(this);
+    localStorage.setItem(`${this.name}`, stringifiedWins);
   }
-  retrieveWinsFromStorage() {
 
-  }
+  // retrieveWinsFromStorage() {
+  //   var storedWins = JSON.parse(localStorage.getItem(`${this.id}`));
+  //   this.id = storedWins.id;
+  //   this.wins = storedWins.wins;
+  //   this.updateWinCount();
+  // }
 }
