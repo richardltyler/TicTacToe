@@ -45,7 +45,7 @@ body {
   justify-content: space-between;
   align-content: space-between;
   flex-wrap: wrap;
-  height: 42em;
+  height: 34em;
   width: 92%;
   margin-top: 4%;
   margin-bottom: 1%;
@@ -66,11 +66,6 @@ body {
   cursor: pointer;
 }
 
-.inactive-button {
-  background: #FFDAE0;
-  pointer-events: none;
-  border: 0%;
-}
 
 /* player section */
 .player-area {

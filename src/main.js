@@ -4,25 +4,19 @@ var gameSpaces = document.querySelectorAll('.game-space');
 var beginButton = document.querySelector('#new-game');
 var player1wins = document.querySelector('.player-one');
 var player2wins = document.querySelector('.player-two');
-var currentPlayer;
 var game;
 var player1;
 var player2;
 
 window.onLoad = createPlayers(), updateWinCountDisplay();
 beginButton.addEventListener('click', startGame);
-
-// for (var i = 0; i < gameSpaces.length; i ++) {
-//   gameSpaces[i].addEventListener('click', claimSpace);
-// }
-
 gameBoard.addEventListener('click', claimSpace);
 
 function startGame() {
   createGame();
   clearBoard();
   hideButton();
-  updateGameHeading(`It's ${currentPlayer.token}'s turn!`);
+  updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
   updateWinCountDisplay();
   toggleClickOnSpace('auto');
 }
@@ -52,13 +46,13 @@ function clearBoard() {
 }
 
 function toggleTurn() {
-  if(currentPlayer === player1) {
-    currentPlayer = player2;
+  if(game.currentPlayer === game.player1) {
+    game.currentPlayer = game.player2;
   } else {
-    currentPlayer = player1;
+    game.currentPlayer = game.player1;
   }
 
-  updateGameHeading(`It's ${currentPlayer.token}'s turn!`);
+  updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
 }
 
 function assignSpaceId() {
@@ -75,14 +69,14 @@ function claimSpace(event) {
 function displayToken(event) {
   var space = event.target;
   if (!space.innerText && space.className === 'game-space') {
-    space.innerText = currentPlayer.token;
-    game.updateGameBoard(space.id, currentPlayer.token);
+    space.innerText = game.currentPlayer.token;
+    game.updateGameBoard(space.id, game.currentPlayer.token);
   }
 }
 
 function decideNextMove() {
-  var status = game.winGame(currentPlayer);
-  var draw = game.tieGame(currentPlayer);
+  var status = game.winGame(game.currentPlayer);
+  var draw = game.tieGame(game.currentPlayer);
   if (status === 'win') {
     winGame();
   } else if (draw === 'draw') {
@@ -94,11 +88,11 @@ function decideNextMove() {
 
 
 function winGame() {
-  game.saveGameBoardToPlayer(currentPlayer);
-  updateGameHeading(`${currentPlayer.token} wins!`);
+  game.saveGameBoardToPlayer(game.currentPlayer);
+  updateGameHeading(`${game.currentPlayer.token} wins!`);
   updateWinCountDisplay();
   toggleClickOnSpace('none');
-  currentPlayer.saveWinsToStorage();
+  game.currentPlayer.saveWinsToStorage();
   timeOut();
 }
 
