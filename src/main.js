@@ -1,6 +1,6 @@
 var gameHeading = document.querySelector('#game-heading');
 var gameSpaces = document.querySelectorAll('.game-space');
-var beginButton = document.querySelector('button');
+var beginButton = document.querySelector('#new-game');
 var player1wins = document.querySelector('.player-one');
 var player2wins = document.querySelector('.player-two');
 var currentPlayer;

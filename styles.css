@@ -13,6 +13,9 @@ body {
 
 .heading {
   margin-top: 4em;
+  text-align: center;
+  height: 1em;
+  width: 7em;
 }
 
 /* game section */
@@ -29,6 +32,7 @@ body {
   border: 0%;
 }
 
+
 .game-area {
   background: #FFDAE0;
   display: flex;
@@ -41,6 +45,7 @@ body {
   color: #22333B;
 }
 
+
 .game-space:hover {
   cursor: pointer;
 }
@@ -52,9 +57,10 @@ body {
   justify-content: space-between;
   align-content: space-between;
   flex-wrap: wrap;
-  height: 74%;
+  height: 42em;
   width: 92%;
   margin-top: 4%;
+  margin-bottom: 1%;
 }
 
  .game-space {
