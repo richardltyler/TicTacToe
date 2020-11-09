@@ -1,4 +1,5 @@
 var gameHeading = document.querySelector('#game-heading');
+var gameBoard = document.querySelector('.game-board');
 var gameSpaces = document.querySelectorAll('.game-space');
 var beginButton = document.querySelector('#new-game');
 var player1wins = document.querySelector('.player-one');
@@ -11,9 +12,11 @@ var player2;
 window.onLoad = createPlayers(), updateWinCountDisplay();
 beginButton.addEventListener('click', startGame);
 
-for (var i = 0; i < gameSpaces.length; i ++) {
-  gameSpaces[i].addEventListener('click', claimSpace);
-}
+// for (var i = 0; i < gameSpaces.length; i ++) {
+//   gameSpaces[i].addEventListener('click', claimSpace);
+// }
+
+gameBoard.addEventListener('click', claimSpace);
 
 function startGame() {
   createGame();
@@ -71,29 +74,26 @@ function claimSpace(event) {
 
 function displayToken(event) {
   var space = event.target;
-  var status = checkForWin();
-  if (!space.innerText && !status) {
+  if (!space.innerText) {
     space.innerText = currentPlayer.token;
     game.updateGameBoard(space.id, currentPlayer.token);
+    // toggleTurn();
   }
 }
 
 function decideNextMove() {
-  var status = checkForWin();
+  var status = game.winGame(currentPlayer);
   var draw = game.tieGame(currentPlayer);
   if (status === 'win') {
     winGame();
   } else if (draw === 'draw') {
     tieGame();
   } else {
-    toggleTurn();
+    displayToken(event);
+    toggleTurn
   }
 }
 
-function checkForWin() {
-  var status = game.winGame(currentPlayer);
-  return status;
-}
 
 function winGame() {
   game.saveGameBoardToPlayer(currentPlayer);

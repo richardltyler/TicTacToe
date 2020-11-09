@@ -7,7 +7,7 @@ body {
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  font-family: sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin: 0%;
 }
 
@@ -26,13 +26,6 @@ body {
   cursor: pointer;
 }
 
-.inactive-button {
-  background: #FFDAE0;
-  pointer-events: none;
-  border: 0%;
-}
-
-
 .game-area {
   background: #FFDAE0;
   display: flex;
@@ -43,11 +36,6 @@ body {
   height: 100vh;
   width: 50%;
   color: #22333B;
-}
-
-
-.game-space:hover {
-  cursor: pointer;
 }
 
 .game-board {
@@ -74,9 +62,15 @@ body {
   pointer-events: none;
 }
 
-/* .game-space {
+.game-space:hover {
+  cursor: pointer;
+}
 
-} */
+.inactive-button {
+  background: #FFDAE0;
+  pointer-events: none;
+  border: 0%;
+}
 
 /* player section */
 .player-area {
@@ -86,7 +80,7 @@ body {
   align-items: center;
   height: 100vh;
   width: 25%;
-  font-family: sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #C03221;
 }
 
