@@ -40,7 +40,7 @@ function toggleTurn() {
     currentPlayer = player1;
   }
 
-  updateWinCountDisplay();
+  updateGameHeading(`It's ${currentPlayer.token}'s turn!`);
 }
 
 function assignSpaceId() {
@@ -51,27 +51,41 @@ function assignSpaceId() {
 
 function claimSpace(event) {
   displayToken(event);
-  checkGameStatus();
-  toggleTurn();
+  decideNextMove();
 }
 
 function displayToken(event) {
   var space = event.target;
-  // var gameEnd = checkGameStatus();
   if (!space.innerText) {
     space.innerText = currentPlayer.token;
     game.updateGameBoard(space.id, currentPlayer.token);
   }
 }
 
+function decideNextMove() {
+  var status = checkGameStatus();
+  if (status === 'win') {
+    winGame();
+  } else if (status === 'draw') {
+    tieGame();
+  } else {
+    toggleTurn();
+  }
+}
+
 function checkGameStatus() {
   var status = game.winGame(currentPlayer);
-  if (status === 'win') {
-    updateGameHeading(`${currentPlayer.token} wins!`);
-    updateWinCountDisplay();
-  } else if (status === 'draw') {
-    updateDisplay(gameHeading, `It's a tie!`);
-  }
+  return status;
+}
+
+function winGame() {
+  game.saveGameBoardToPlayer(currentPlayer);
+  updateGameHeading(`${currentPlayer.token} wins!`);
+  updateWinCountDisplay();
+}
+
+function tieGame() {
+  updateDisplay(gameHeading, `It's a tie!`);
 }
 
 function updateGameHeading(message) {
