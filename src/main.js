@@ -56,7 +56,7 @@ function claimSpace(event) {
 
 function displayToken(event) {
   var space = event.target;
-  if (!space.innerText) {
+  if (!space.innerText && !checkGameStatus()) {
     space.innerText = currentPlayer.token;
     game.updateGameBoard(space.id, currentPlayer.token);
   }
