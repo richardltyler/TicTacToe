@@ -5,9 +5,10 @@ var player1wins = document.querySelector('.player-one');
 var player2wins = document.querySelector('.player-two');
 var currentPlayer;
 var game;
-var player1 =  new Player('X');
-var player2 = new Player('Ｏ');
+var player1;
+var player2;
 
+window.onLoad = createPlayers(), updateWinCountDisplay();
 beginButton.addEventListener('click', startGame);
 
 for (var i = 0; i < gameSpaces.length; i ++) {
@@ -27,6 +28,14 @@ function createGame() {
   assignSpaceId();
   toggleTurn();
 }
+
+function createPlayers() {
+  player1 = new Player('player1', 'X');
+  player2 = new Player('player2', 'Ｏ');
+  player1.retrieveWinsFromStorage();
+  player2.retrieveWinsFromStorage();
+  }
+
 
 function clearBoard() {
   for (var i = 0; i < gameSpaces.length; i++) {
@@ -57,7 +66,7 @@ function claimSpace(event) {
 
 function displayToken(event) {
   var space = event.target;
-  var status = checkGameStatus();
+  var status = checkForWin();
   if (!space.innerText && !status) {
     space.innerText = currentPlayer.token;
     game.updateGameBoard(space.id, currentPlayer.token);
@@ -65,17 +74,18 @@ function displayToken(event) {
 }
 
 function decideNextMove() {
-  var status = checkGameStatus();
+  var status = checkForWin();
+  var draw = game.tieGame(currentPlayer);
   if (status === 'win') {
     winGame();
-  } else if (status === 'draw') {
+  } else if (draw === 'draw') {
     tieGame();
   } else {
     toggleTurn();
   }
 }
 
-function checkGameStatus() {
+function checkForWin() {
   var status = game.winGame(currentPlayer);
   return status;
 }
@@ -85,6 +95,7 @@ function winGame() {
   updateGameHeading(`${currentPlayer.token} wins!`);
   updateWinCountDisplay();
   toggleClickOnSpace('none');
+  currentPlayer.saveWinsToStorage();
 }
 
 
@@ -94,7 +105,7 @@ function toggleClickOnSpace(newValue) {
 }
 
 function tieGame() {
-  updateDisplay(gameHeading, `It's a tie!`);
+  updateGameHeading(`It's a tie!`);
 }
 
 function updateGameHeading(message) {
