@@ -25,7 +25,7 @@ function startGame() {
 }
 
 function hideButton() {
-  beginButton.hidden = true;
+  beginButton.className = 'inactive-button';
 }
 
 function createGame() {

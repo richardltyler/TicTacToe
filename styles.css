@@ -16,9 +16,17 @@ body {
 }
 
 /* game section */
-button {
+.active-button {
   background: #22333B;
   color: white;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.inactive-button {
+  background: #FFDAE0;
+  pointer-events: none;
+  border: 0%;
 }
 
 .game-area {
@@ -33,7 +41,7 @@ button {
   color: #22333B;
 }
 
-.game-spaces:hover {
+.game-space:hover {
   cursor: pointer;
 }
 
@@ -46,7 +54,7 @@ button {
   flex-wrap: wrap;
   height: 74%;
   width: 92%;
-  /* margin-top: 4%; */
+  margin-top: 4%;
 }
 
  .game-space {
