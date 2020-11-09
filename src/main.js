@@ -66,7 +66,7 @@ function claimSpace(event) {
 
 function displayToken(event) {
   var space = event.target;
-  var status = checkGameStatus();
+  var status = checkForWin();
   if (!space.innerText && !status) {
     space.innerText = currentPlayer.token;
     game.updateGameBoard(space.id, currentPlayer.token);
@@ -74,17 +74,18 @@ function displayToken(event) {
 }
 
 function decideNextMove() {
-  var status = checkGameStatus();
+  var status = checkForWin();
+  var draw = game.tieGame(currentPlayer);
   if (status === 'win') {
     winGame();
-  } else if (status === 'draw') {
+  } else if (draw === 'draw') {
     tieGame();
   } else {
     toggleTurn();
   }
 }
 
-function checkGameStatus() {
+function checkForWin() {
   var status = game.winGame(currentPlayer);
   return status;
 }
@@ -104,7 +105,7 @@ function toggleClickOnSpace(newValue) {
 }
 
 function tieGame() {
-  updateDisplay(gameHeading, `It's a tie!`);
+  updateGameHeading(`It's a tie!`);
 }
 
 function updateGameHeading(message) {
