@@ -19,6 +19,7 @@ function startGame() {
   clearBoard();
   updateGameHeading(`It's ${currentPlayer.token}'s turn!`);
   updateWinCountDisplay();
+  toggleClickOnSpace('auto');
 }
 
 function createGame() {
@@ -56,7 +57,8 @@ function claimSpace(event) {
 
 function displayToken(event) {
   var space = event.target;
-  if (!space.innerText && !checkGameStatus()) {
+  var status = checkGameStatus();
+  if (!space.innerText && !status) {
     space.innerText = currentPlayer.token;
     game.updateGameBoard(space.id, currentPlayer.token);
   }
@@ -82,6 +84,13 @@ function winGame() {
   game.saveGameBoardToPlayer(currentPlayer);
   updateGameHeading(`${currentPlayer.token} wins!`);
   updateWinCountDisplay();
+  toggleClickOnSpace('none');
+}
+
+
+function toggleClickOnSpace(newValue) {
+  for (var i = 0; i < gameSpaces.length; i++)
+  gameSpaces[i].style.pointerEvents = newValue;
 }
 
 function tieGame() {
@@ -96,7 +105,3 @@ function updateWinCountDisplay() {
   player1wins.innerText = (`${player1.winCount} WINS`);
   player2wins.innerText = (`${player2.winCount} WINS`);
 }
-
-
-
-// don't forget that you can still add tokens after game has finished
