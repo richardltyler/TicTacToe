@@ -42,7 +42,7 @@ function createPlayers() {
   player2 = new Player('player2', 'Ｏ');
   player1.retrieveWinsFromStorage();
   player2.retrieveWinsFromStorage();
-  }
+}
 
 
 function clearBoard() {
@@ -68,13 +68,13 @@ function assignSpaceId() {
 }
 
 function claimSpace(event) {
-  // displayToken(event);
+  displayToken(event);
   decideNextMove();
 }
 
 function displayToken(event) {
   var space = event.target;
-  if (!space.innerText) {
+  if (!space.innerText && space.className === 'game-space') {
     space.innerText = currentPlayer.token;
     game.updateGameBoard(space.id, currentPlayer.token);
   }
@@ -88,7 +88,6 @@ function decideNextMove() {
   } else if (draw === 'draw') {
     tieGame();
   } else {
-    displayToken(event);
     toggleTurn();
   }
 }
@@ -100,16 +99,7 @@ function winGame() {
   updateWinCountDisplay();
   toggleClickOnSpace('none');
   currentPlayer.saveWinsToStorage();
-}
-
-
-function toggleClickOnSpace(newValue) {
-  for (var i = 0; i < gameSpaces.length; i++)
-  gameSpaces[i].style.pointerEvents = newValue;
-}
-
-function tieGame() {
-  updateGameHeading(`It's a tie!`);
+  timeOut();
 }
 
 function updateGameHeading(message) {
@@ -119,4 +109,19 @@ function updateGameHeading(message) {
 function updateWinCountDisplay() {
   player1wins.innerText = (`${player1.winCount} WINS`);
   player2wins.innerText = (`${player2.winCount} WINS`);
+}
+
+function toggleClickOnSpace(newValue) {
+  for (var i = 0; i < gameSpaces.length; i++)
+  gameSpaces[i].style.pointerEvents = newValue;
+}
+
+function tieGame() {
+  toggleClickOnSpace('none');
+  updateGameHeading(`It's a tie!`);
+  timeOut();
+}
+
+function timeOut() {
+  window.setTimeout(startGame, 2000);
 }
