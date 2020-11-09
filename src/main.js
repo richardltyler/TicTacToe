@@ -85,6 +85,7 @@ function winGame() {
   updateGameHeading(`${currentPlayer.token} wins!`);
   updateWinCountDisplay();
   toggleClickOnSpace('none');
+  currentPlayer.saveWinsToStorage();
 }
 
 
