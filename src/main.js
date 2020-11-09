@@ -68,7 +68,7 @@ function assignSpaceId() {
 }
 
 function claimSpace(event) {
-  displayToken(event);
+  // displayToken(event);
   decideNextMove();
 }
 
@@ -77,7 +77,6 @@ function displayToken(event) {
   if (!space.innerText) {
     space.innerText = currentPlayer.token;
     game.updateGameBoard(space.id, currentPlayer.token);
-    // toggleTurn();
   }
 }
 
@@ -90,7 +89,7 @@ function decideNextMove() {
     tieGame();
   } else {
     displayToken(event);
-    toggleTurn
+    toggleTurn();
   }
 }
 
