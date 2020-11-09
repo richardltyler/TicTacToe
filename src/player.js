@@ -15,10 +15,9 @@ class Player {
     localStorage.setItem(`${this.name}`, stringifiedWins);
   }
 
-  // retrieveWinsFromStorage() {
-  //   var storedWins = JSON.parse(localStorage.getItem(`${this.id}`));
-  //   this.id = storedWins.id;
-  //   this.wins = storedWins.wins;
-  //   this.updateWinCount();
-  // }
+  retrieveWinsFromStorage() {
+    var storedWins = JSON.parse(localStorage.getItem(`${this.name}`));
+    this.wins = storedWins;
+    this.updateWinCount();
+  }
 }
