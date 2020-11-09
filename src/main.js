@@ -17,7 +17,8 @@ for (var i = 0; i < gameSpaces.length; i ++) {
 function startGame() {
   createGame();
   clearBoard();
-  updateDisplay(gameHeading, `It's ${currentPlayer.token}'s turn!`);
+  updateGameHeading(`It's ${currentPlayer.token}'s turn!`);
+  updateWinCountDisplay();
 }
 
 function createGame() {
@@ -33,13 +34,13 @@ function clearBoard() {
 }
 
 function toggleTurn() {
-  if(currentPlayer === player1 || !currentPlayer) {
+  if(currentPlayer === player1) {
     currentPlayer = player2;
   } else {
     currentPlayer = player1;
   }
 
-  updateDisplay(gameHeading, `It's ${currentPlayer.token}'s turn!`);
+  updateWinCountDisplay();
 }
 
 function assignSpaceId() {
@@ -51,10 +52,12 @@ function assignSpaceId() {
 function claimSpace(event) {
   displayToken(event);
   checkGameStatus();
+  toggleTurn();
 }
 
 function displayToken(event) {
   var space = event.target;
+  // var gameEnd = checkGameStatus();
   if (!space.innerText) {
     space.innerText = currentPlayer.token;
     game.updateGameBoard(space.id, currentPlayer.token);
@@ -63,19 +66,21 @@ function displayToken(event) {
 
 function checkGameStatus() {
   var status = game.winGame(currentPlayer);
-  if (status === true) {
-    updateDisplay(gameHeading, `${currentPlayer.token} wins!`);
-    updateDisplay(player1wins, `${player1.winCount} WINS`);
-    updateDisplay(player2wins, `${player2.winCount} WINS`)
-  } else if (status === false) {
+  if (status === 'win') {
+    updateGameHeading(`${currentPlayer.token} wins!`);
+    updateWinCountDisplay();
+  } else if (status === 'draw') {
     updateDisplay(gameHeading, `It's a tie!`);
-  } else {
-    toggleTurn();
   }
 }
 
-function updateDisplay(place, message) {
-  place.innerText = message;
+function updateGameHeading(message) {
+  gameHeading.innerText = message;
+}
+
+function updateWinCountDisplay() {
+  player1wins.innerText = (`${player1.winCount} WINS`);
+  player2wins.innerText = (`${player2.winCount} WINS`);
 }
 
 

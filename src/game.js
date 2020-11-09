@@ -27,10 +27,13 @@ class Game {
       var space = this.winningSequences[i];
       if (token === board[space[0]] && token === board[space[1]] && token === board[space[2]]) {
         this.saveGameBoardToPlayer(player);
-        return true;
+        return 'win';
       } else if (!this.gameBoard.includes(null)) {
-        return false;
+        return 'draw';
       }
+      // } else {
+      //   return false;
+      // }
     }
   }
 
