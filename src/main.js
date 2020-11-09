@@ -34,15 +34,12 @@ function clearBoard() {
 }
 
 function toggleTurn() {
-  if (player1.isTurn === false) {
-    player1.isTurn = true;
-    player2.isTurn = false;
-    currentPlayer = player1;
-  } else if (player1.isTurn === true) {
-    player1.isTurn = false;
-    player2.isTurn = true;
+  if(currentPlayer === player1 || !currentPlayer) {
     currentPlayer = player2;
+  } else {
+    currentPlayer = player1;
   }
+
   displayTurn(currentPlayer);
 }
 
@@ -59,7 +56,6 @@ function assignSpaceId() {
 
 function claimSpace(event) {
   displayToken(event);
-  game.updateGameBoard();
   checkGameStatus();
 }
 
@@ -67,8 +63,7 @@ function displayToken(event) {
   var space = event.target;
   if (!space.innerText) {
     space.innerText = currentPlayer.token;
-    // game.updateGameBoard(space.id, currentPlayer.token);
-    // checkGameStatus();
+    game.updateGameBoard(space.id, currentPlayer.token);
   }
 }
 
