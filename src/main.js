@@ -59,12 +59,13 @@ function claimSpace(event) {
   var space = event.target;
   if (!game.gameBoard[space.id]) {
     game.updateGameBoard(space.id);
-    decideNextMove();
     displayGame();
+    checkGameStatus();
+
   }
 }
 
-function decideNextMove() {
+function checkGameStatus() {
   var win = game.checkForWin(game.currentPlayer);
   var draw = game.checkForDraw(game.currentPlayer);
   if (win) {
@@ -81,7 +82,6 @@ function winGame() {
   game.saveGameBoardToPlayer(game.currentPlayer);
   updateGameHeading(`${game.currentPlayer.token} wins!`);
   updateWinCountDisplay();
-  game.currentPlayer.saveWinsToStorage();
   timeOut();
 }
 

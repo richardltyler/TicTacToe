@@ -46,6 +46,7 @@ class Game {
 
   saveGameBoardToPlayer(winner) {
     winner.wins.push(this.gameBoard);
+    winner.saveWinsToStorage();
     winner.updateWinCount();
   }
 
