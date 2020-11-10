@@ -30,8 +30,8 @@ class Game {
   checkForWin() {
     var token = this.currentPlayer.token;
     var board = this.gameBoard;
-    for (var i = 0; i < this.winningSequences.length; i++) {
-      var order = this.winningSequences;
+    var order = this.winningSequences;
+    for (var i = 0; i < order.length; i++) {
       if (board[order[i][0]] === token && board[order[i][1]] === token && board[order[i][2]] === token) {
         return true;
       }
