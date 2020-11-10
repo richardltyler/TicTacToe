@@ -5,10 +5,8 @@ var beginButton = document.querySelector('#new-game');
 var player1wins = document.querySelector('.player-one');
 var player2wins = document.querySelector('.player-two');
 var game;
-var player1;
-var player2;
 
-window.onLoad = createPlayers(), updateWinCountDisplay();
+window.onLoad = createGame(), updateWinCountDisplay();
 beginButton.addEventListener('click', startGame);
 gameBoard.addEventListener('click', claimSpace);
 
@@ -26,16 +24,17 @@ function hideButton() {
 }
 
 function createGame() {
+  var player1 = createPlayer('player1', 'X');
+  var player2 = createPlayer('player2', 'Ｏ')
   game = new Game(player1, player2);
   assignSpaceId();
   toggleTurn();
 }
 
-function createPlayers() {
-  player1 = new Player('player1', 'X');
-  player2 = new Player('player2', 'Ｏ');
-  player1.retrieveWinsFromStorage();
-  player2.retrieveWinsFromStorage();
+function createPlayer(name, token) {
+  var newPlayer = new Player(name, token);
+  newPlayer.retrieveWinsFromStorage();
+  return newPlayer;
 }
 
 
@@ -101,8 +100,8 @@ function updateGameHeading(message) {
 }
 
 function updateWinCountDisplay() {
-  player1wins.innerText = (`${player1.winCount} WINS`);
-  player2wins.innerText = (`${player2.winCount} WINS`);
+  player1wins.innerText = (`${game.player1.winCount} WINS`);
+  player2wins.innerText = (`${game.player2.winCount} WINS`);
 }
 
 function toggleClickOnSpace(newValue) {
