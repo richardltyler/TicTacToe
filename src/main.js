@@ -5,7 +5,7 @@ var player1wins = document.querySelector('.player-one');
 var player2wins = document.querySelector('.player-two');
 var game;
 
-window.onLoad = startGame(), updateWinCountDisplay();
+window.onLoad = startGame();
 gameBoard.addEventListener('click', claimSpace);
 
 function startGame() {
@@ -46,6 +46,15 @@ function updateGameHeading(message) {
   gameHeading.innerText = message;
 }
 
+function updateWinCountDisplay() {
+  player1wins.innerText = (`${game.player1.winCount} WINS`);
+  player2wins.innerText = (`${game.player2.winCount} WINS`);
+}
+
+function toggleClickOnBoard(newValue) {
+  gameBoard.style.pointerEvents = newValue;
+}
+
 function claimSpace(event) {
   var space = event.target;
   if (!game.gameBoard[space.id]) {
@@ -67,7 +76,6 @@ function decideNextMove() {
   }
 }
 
-
 function winGame() {
   toggleClickOnBoard('none');
   game.saveGameBoardToPlayer(game.currentPlayer);
@@ -77,23 +85,14 @@ function winGame() {
   timeOut();
 }
 
-function updateWinCountDisplay() {
-  player1wins.innerText = (`${game.player1.winCount} WINS`);
-  player2wins.innerText = (`${game.player2.winCount} WINS`);
-}
-
-function toggleClickOnBoard(newValue) {
-  gameBoard.style.pointerEvents = newValue;
+function timeOut() {
+  window.setTimeout(startGame, 2000);
 }
 
 function tieGame() {
   toggleClickOnBoard('none');
   updateGameHeading(`It's a tie!`);
   timeOut();
-}
-
-function timeOut() {
-  window.setTimeout(startGame, 2000);
 }
 
 function toggleTurn() {
