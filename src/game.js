@@ -36,9 +36,9 @@ class Game {
         return 'win';
       } else if(!this.gameBoard.includes(null)) {
         return 'draw';
+      }
     }
   }
-}
 
   saveGameBoardToPlayer() {
     this.currentPlayer.wins.push(this.gameBoard);
