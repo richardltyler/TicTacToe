@@ -49,6 +49,7 @@ body {
   width: 92%;
   margin-top: 4%;
   margin-bottom: 1%;
+  pointer-events: auto;
 }
 
  .game-space {
@@ -59,7 +60,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 8em;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .game-space:hover {
@@ -79,6 +80,6 @@ body {
   color: #C03221;
 }
 
-h3 {
+.player-wins {
   margin-top: -0.5em;
 }

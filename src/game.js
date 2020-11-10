@@ -17,33 +17,44 @@ class Game {
       ];
   }
 
-  updateGameBoard(index, token) {
-    this.gameBoard[index] = token;
+  updateGameBoard(index) {
+      this.gameBoard[index] = this.currentPlayer.token;
   }
 
-  winGame(player) {
+  decideFirstTurn() {
+    var players = [this.player1, this.player2];
+    var randomIndex = Math.floor(Math.random() * players.length);
+    this.currentPlayer = players[randomIndex];
+  }
+
+  checkForWin(player) {
     var token = player.token;
     var board = this.gameBoard;
     for (var i = 0; i < this.winningSequences.length; i++) {
       var space = this.winningSequences[i];
       if (board[space[0]] === token && board[space[1]] === token && board[space[2]] === token) {
-        return 'win';
+        return true;
       }
     }
   }
 
-  tieGame(player) {
+  checkForDraw(player) {
     if (!this.gameBoard.includes(null)) {
-      return 'draw';
+      return true;
     }
   }
 
   saveGameBoardToPlayer(winner) {
     winner.wins.push(this.gameBoard);
+    winner.saveWinsToStorage();
     winner.updateWinCount();
   }
 
   toggleTurn() {
-    
+    if(this.currentPlayer === this.player1) {
+      this.currentPlayer = this.player2;
+    } else {
+      this.currentPlayer = this.player1;
+    }
   }
 }
