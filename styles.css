@@ -49,6 +49,7 @@ body {
   width: 92%;
   margin-top: 4%;
   margin-bottom: 1%;
+  pointer-events: none;
 }
 
  .game-space {
@@ -59,7 +60,6 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 8em;
-  pointer-events: none;
 }
 
 .game-space:hover {

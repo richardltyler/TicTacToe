@@ -38,11 +38,13 @@ function clearBoard() {
   }
 }
 
-function toggleTurn(event) {
-  if (!event.target){
+function toggleTurn() {
+  // console.log(event.target.innerText);
+  // if (event.target.innerText !== game.currentPlayer.token) {
     game.toggleTurn();
+    console.log(game.currentPlayer);
     updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
-  }
+  // }
 }
 
 function assignSpaceId() {
@@ -61,7 +63,6 @@ function displayToken(event) {
   if (!space.innerText && space.className === 'game-space') {
     space.innerText = game.currentPlayer.token;
     game.updateGameBoard(space.id, game.currentPlayer.token);
-    // toggleTurn(event);
   }
 }
 
@@ -73,16 +74,16 @@ function decideNextMove() {
   } else if (draw === 'draw') {
     tieGame();
   } else {
-    toggleTurn(event);
+    toggleTurn();
   }
 }
 
 
 function winGame() {
+  toggleClickOnSpace('none');
   game.saveGameBoardToPlayer(game.currentPlayer);
   updateGameHeading(`${game.currentPlayer.token} wins!`);
   updateWinCountDisplay();
-  toggleClickOnSpace('none');
   game.currentPlayer.saveWinsToStorage();
   timeOut();
 }
@@ -97,8 +98,8 @@ function updateWinCountDisplay() {
 }
 
 function toggleClickOnSpace(newValue) {
-  for (var i = 0; i < gameSpaces.length; i++)
-  gameSpaces[i].style.pointerEvents = newValue;
+  // for (var i = 0; i < gameSpaces.length; i++)
+  gameBoard.style.pointerEvents = newValue;
 }
 
 function tieGame() {
