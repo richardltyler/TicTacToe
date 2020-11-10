@@ -65,11 +65,10 @@ function claimSpace(event) {
 }
 
 function checkGameStatus() {
-  var win = game.checkForWin(game.currentPlayer);
-  var draw = game.checkForDraw(game.currentPlayer);
-  if (win) {
+  var status = game.checkForGameEnd();
+  if (status === 'win') {
     winGame();
-  } else if (draw) {
+  } else if (status === 'draw') {
     tieGame();
   } else {
     toggleTurn();
@@ -78,8 +77,8 @@ function checkGameStatus() {
 
 function winGame() {
   toggleClickOnBoard('none');
-  game.saveGameBoardToPlayer(game.currentPlayer);
   updateGameHeading(`${game.currentPlayer.token} wins!`);
+  game.saveGameBoardToPlayer();
   displayWins();
   timeOut();
 }

@@ -27,27 +27,23 @@ class Game {
     this.currentPlayer = players[randomIndex];
   }
 
-  checkForWin(player) {
-    var token = player.token;
+  checkForGameEnd() {
+    var token = this.currentPlayer.token;
     var board = this.gameBoard;
-    for (var i = 0; i < this.winningSequences.length; i++) {
-      var space = this.winningSequences[i];
-      if (board[space[0]] === token && board[space[1]] === token && board[space[2]] === token) {
-        return true;
-      }
+    var order = this.winningSequences;
+    for (var i = 0; i < order.length; i++) {
+      if (board[order[i][0]] === token && board[order[i][1]] === token && board[order[i][2]] === token) {
+        return 'win';
+      } else if(!this.gameBoard.includes(null)) {
+        return 'draw';
     }
   }
+}
 
-  checkForDraw(player) {
-    if (!this.gameBoard.includes(null)) {
-      return true;
-    }
-  }
-
-  saveGameBoardToPlayer(winner) {
-    winner.wins.push(this.gameBoard);
-    winner.saveWinsToStorage();
-    winner.updateWinCount();
+  saveGameBoardToPlayer() {
+    this.currentPlayer.wins.push(this.gameBoard);
+    this.currentPlayer.saveWinsToStorage();
+    this.currentPlayer.updateWinCount();
   }
 
   toggleTurn() {
