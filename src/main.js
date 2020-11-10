@@ -10,11 +10,9 @@ gameBoard.addEventListener('click', claimSpace);
 
 function startGame() {
   createGame();
-  // clearBoard();
   displayGame();
   updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
   updateWinCountDisplay();
-  toggleClickOnSpace('auto');
 }
 
 function createGame() {
@@ -23,7 +21,6 @@ function createGame() {
   game = new Game(player1, player2);
   assignSpaceId();
   game.decideFirstTurn();
-  // try to figure out conditional for toggleTurn();
 }
 
 function createPlayer(name, token) {
@@ -32,10 +29,9 @@ function createPlayer(name, token) {
   return newPlayer;
 }
 
-
-function clearBoard() {
-  for (var i = 0; i < gameSpaces.length; i++) {
-    gameSpaces[i].innerText = '';
+function displayGame() {
+  for (var i = 0; i < game.gameBoard.length; i++) {
+    gameSpaces[i].innerText = game.gameBoard[i];
   }
 }
 
@@ -55,20 +51,9 @@ function claimSpace(event) {
   if (!game.gameBoard[space.id]) {
     game.updateGameBoard(space.id);
     decideNextMove();
-    // game.toggleTurn();
-    // updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
-    // displayToken(event);
     displayGame();
   }
 }
-
-// function displayToken(inde) {
-//   // if (!this.gameBoard[space.id]) {
-//     game.updateGameBoard(space.id);
-//     game.toggleTurn();
-//     updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
-//   }
-// }
 
 function decideNextMove() {
   var win = game.winGame(game.currentPlayer);
@@ -85,7 +70,7 @@ function decideNextMove() {
 
 
 function winGame() {
-  toggleClickOnSpace('none');
+  toggleClickOnBoard('none');
   game.saveGameBoardToPlayer(game.currentPlayer);
   updateGameHeading(`${game.currentPlayer.token} wins!`);
   updateWinCountDisplay();
@@ -102,22 +87,16 @@ function updateWinCountDisplay() {
   player2wins.innerText = (`${game.player2.winCount} WINS`);
 }
 
-function toggleClickOnSpace(newValue) {
+function toggleClickOnBoard(newValue) {
   gameBoard.style.pointerEvents = newValue;
 }
 
 function tieGame() {
-  toggleClickOnSpace('none');
+  toggleClickOnBoard('none');
   updateGameHeading(`It's a tie!`);
   timeOut();
 }
 
 function timeOut() {
   window.setTimeout(startGame, 2000);
-}
-
-function displayGame() {
-  for (var i = 0; i < game.gameBoard.length; i++) {
-    gameSpaces[i].innerText = game.gameBoard[i];
-  }
 }
