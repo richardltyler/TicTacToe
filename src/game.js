@@ -17,8 +17,9 @@ class Game {
       ];
   }
 
-  updateGameBoard(index, token) {
-    this.gameBoard[index] = token;
+  updateGameBoard(index) {
+      this.gameBoard[index] = this.currentPlayer.token;
+      // this.toggleTurn();
   }
 
   decideFirstTurn() {
@@ -33,14 +34,14 @@ class Game {
     for (var i = 0; i < this.winningSequences.length; i++) {
       var space = this.winningSequences[i];
       if (board[space[0]] === token && board[space[1]] === token && board[space[2]] === token) {
-        return 'win';
+        return true;
       }
     }
   }
 
   tieGame(player) {
     if (!this.gameBoard.includes(null)) {
-      return 'draw';
+      return true;
     }
   }
 
@@ -55,6 +56,5 @@ class Game {
     } else {
       this.currentPlayer = this.player1;
     }
-
   }
 }

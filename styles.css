@@ -60,6 +60,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 8em;
+  /* pointer-events: none; */
 }
 
 .game-space:hover {

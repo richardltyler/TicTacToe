@@ -10,7 +10,8 @@ gameBoard.addEventListener('click', claimSpace);
 
 function startGame() {
   createGame();
-  clearBoard();
+  // clearBoard();
+  displayGame();
   updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
   updateWinCountDisplay();
   toggleClickOnSpace('auto');
@@ -38,13 +39,9 @@ function clearBoard() {
   }
 }
 
-function toggleTurn() {
-  // console.log(event.target.innerText);
-  // if (event.target.innerText !== game.currentPlayer.token) {
+function toggleTurn(event) {
     game.toggleTurn();
-    console.log(game.currentPlayer);
     updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
-  // }
 }
 
 function assignSpaceId() {
@@ -54,27 +51,35 @@ function assignSpaceId() {
 }
 
 function claimSpace(event) {
-  displayToken(event);
-  decideNextMove();
-}
-
-function displayToken(event) {
   var space = event.target;
-  if (!space.innerText && space.className === 'game-space') {
-    space.innerText = game.currentPlayer.token;
-    game.updateGameBoard(space.id, game.currentPlayer.token);
+  if (!game.gameBoard[space.id]) {
+    game.updateGameBoard(space.id);
+    decideNextMove();
+    // game.toggleTurn();
+    // updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
+    // displayToken(event);
+    displayGame();
   }
 }
 
+// function displayToken(inde) {
+//   // if (!this.gameBoard[space.id]) {
+//     game.updateGameBoard(space.id);
+//     game.toggleTurn();
+//     updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
+//   }
+// }
+
 function decideNextMove() {
-  var status = game.winGame(game.currentPlayer);
+  var win = game.winGame(game.currentPlayer);
   var draw = game.tieGame(game.currentPlayer);
-  if (status === 'win') {
+  if (win) {
     winGame();
-  } else if (draw === 'draw') {
+  } else if (draw) {
     tieGame();
   } else {
-    toggleTurn();
+    game.toggleTurn();
+    updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
   }
 }
 
@@ -98,7 +103,6 @@ function updateWinCountDisplay() {
 }
 
 function toggleClickOnSpace(newValue) {
-  // for (var i = 0; i < gameSpaces.length; i++)
   gameBoard.style.pointerEvents = newValue;
 }
 
@@ -110,4 +114,10 @@ function tieGame() {
 
 function timeOut() {
   window.setTimeout(startGame, 2000);
+}
+
+function displayGame() {
+  for (var i = 0; i < game.gameBoard.length; i++) {
+    gameSpaces[i].innerText = game.gameBoard[i];
+  }
 }
