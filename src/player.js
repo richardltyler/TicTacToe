@@ -5,6 +5,7 @@ class Player {
     this.wins = wins || [];
     this.winCount = 0;
   }
+  
   updateWinCount() {
     this.winCount = this.wins.length;
   }
