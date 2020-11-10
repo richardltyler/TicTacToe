@@ -78,6 +78,7 @@ function checkGameStatus() {
 function winGame() {
   toggleClickOnBoard('none');
   updateGameHeading(`${game.currentPlayer.token} wins!`);
+  game.saveGameBoardToPlayer();
   displayWins();
   timeOut();
 }

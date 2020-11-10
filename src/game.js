@@ -33,7 +33,6 @@ class Game {
     var order = this.winningSequences;
     for (var i = 0; i < order.length; i++) {
       if (board[order[i][0]] === token && board[order[i][1]] === token && board[order[i][2]] === token) {
-        this.saveGameBoardToPlayer();
         return 'win';
       } else if(!this.gameBoard.includes(null)) {
         return 'draw';
