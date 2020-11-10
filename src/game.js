@@ -2,6 +2,7 @@ class Game {
   constructor(player1, player2) {
     this.player1 = player1;
     this.player2 = player2;
+    this.currentPlayer;
     this.gameBoard = [null, null, null, null, null, null, null, null, null];
     this.winner;
     this.winningSequences = [
@@ -23,12 +24,9 @@ class Game {
   winGame(player) {
     var token = player.token;
     var board = this.gameBoard;
-    // var win = false;
     for (var i = 0; i < this.winningSequences.length; i++) {
       var space = this.winningSequences[i];
       if (board[space[0]] === token && board[space[1]] === token && board[space[2]] === token) {
-        console.log('motherFucker');
-        // win = true;
         return 'win';
       }
     }
@@ -43,5 +41,9 @@ class Game {
   saveGameBoardToPlayer(winner) {
     winner.wins.push(this.gameBoard);
     winner.updateWinCount();
+  }
+
+  toggleTurn() {
+    
   }
 }
