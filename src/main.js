@@ -38,12 +38,7 @@ function clearBoard() {
 }
 
 function toggleTurn() {
-  if(game.currentPlayer === game.player1) {
-    game.currentPlayer = game.player2;
-  } else {
-    game.currentPlayer = game.player1;
-  }
-
+  game.toggleTurn();
   updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
 }
 
