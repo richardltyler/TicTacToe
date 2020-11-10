@@ -13,6 +13,7 @@ function startGame() {
   displayGame();
   updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
   updateWinCountDisplay();
+  toggleClickOnBoard('auto');
 }
 
 function createGame() {
@@ -29,21 +30,20 @@ function createPlayer(name, token) {
   return newPlayer;
 }
 
+function assignSpaceId() {
+  for (var i = 0; i < game.gameBoard.length; i++) {
+    gameSpaces[i].id = `${i}`;
+  }
+}
+
 function displayGame() {
   for (var i = 0; i < game.gameBoard.length; i++) {
     gameSpaces[i].innerText = game.gameBoard[i];
   }
 }
 
-function toggleTurn(event) {
-    game.toggleTurn();
-    updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
-}
-
-function assignSpaceId() {
-  for (var i = 0; i < game.gameBoard.length; i++) {
-    gameSpaces[i].id = `${i}`;
-  }
+function updateGameHeading(message) {
+  gameHeading.innerText = message;
 }
 
 function claimSpace(event) {
@@ -63,8 +63,7 @@ function decideNextMove() {
   } else if (draw) {
     tieGame();
   } else {
-    game.toggleTurn();
-    updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
+    toggleTurn();
   }
 }
 
@@ -76,10 +75,6 @@ function winGame() {
   updateWinCountDisplay();
   game.currentPlayer.saveWinsToStorage();
   timeOut();
-}
-
-function updateGameHeading(message) {
-  gameHeading.innerText = message;
 }
 
 function updateWinCountDisplay() {
@@ -99,4 +94,9 @@ function tieGame() {
 
 function timeOut() {
   window.setTimeout(startGame, 2000);
+}
+
+function toggleTurn() {
+    game.toggleTurn();
+    updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
 }
