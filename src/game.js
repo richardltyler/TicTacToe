@@ -18,7 +18,7 @@ class Game {
   }
 
   updateGameBoard(index) {
-      this.gameBoard[index] = this.currentPlayer.token;
+    this.gameBoard[index] = this.currentPlayer.token;
   }
 
   decideFirstTurn() {
@@ -34,11 +34,11 @@ class Game {
     for (var i = 0; i < order.length; i++) {
       if (board[order[i][0]] === token && board[order[i][1]] === token && board[order[i][2]] === token) {
         return 'win';
-      } else if(!this.gameBoard.includes(null)) {
+      } else if (!this.gameBoard.includes(null)) {
         return 'draw';
+      }
     }
   }
-}
 
   saveGameBoardToPlayer() {
     this.currentPlayer.wins.push(this.gameBoard);
