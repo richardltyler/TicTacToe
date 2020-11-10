@@ -21,6 +21,12 @@ class Game {
     this.gameBoard[index] = token;
   }
 
+  decideFirstTurn() {
+    var players = [this.player1, this.player2];
+    var randomIndex = Math.floor(Math.random() * players.length);
+    this.currentPlayer = players[randomIndex];
+  }
+
   winGame(player) {
     var token = player.token;
     var board = this.gameBoard;

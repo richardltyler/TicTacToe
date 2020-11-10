@@ -21,7 +21,8 @@ function createGame() {
   var player2 = createPlayer('player2', 'Ｏ')
   game = new Game(player1, player2);
   assignSpaceId();
-  toggleTurn();
+  game.decideFirstTurn();
+  // try to figure out conditional for toggleTurn();
 }
 
 function createPlayer(name, token) {
@@ -37,9 +38,11 @@ function clearBoard() {
   }
 }
 
-function toggleTurn() {
-  game.toggleTurn();
-  updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
+function toggleTurn(event) {
+  if (!event.target){
+    game.toggleTurn();
+    updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
+  }
 }
 
 function assignSpaceId() {
@@ -58,6 +61,7 @@ function displayToken(event) {
   if (!space.innerText && space.className === 'game-space') {
     space.innerText = game.currentPlayer.token;
     game.updateGameBoard(space.id, game.currentPlayer.token);
+    // toggleTurn(event);
   }
 }
 
@@ -69,7 +73,7 @@ function decideNextMove() {
   } else if (draw === 'draw') {
     tieGame();
   } else {
-    toggleTurn();
+    toggleTurn(event);
   }
 }
 
