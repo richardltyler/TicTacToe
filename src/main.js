@@ -1,8 +1,8 @@
 var gameHeading = document.querySelector('#game-heading');
 var gameBoard = document.querySelector('.game-board');
 var gameSpaces = document.querySelectorAll('.game-space');
-var player1wins = document.querySelector('.player-one');
-var player2wins = document.querySelector('.player-two');
+var player1Wins = document.querySelector('.player-one');
+var player2Wins = document.querySelector('.player-two');
 var game;
 
 window.onLoad = startGame();
@@ -12,7 +12,7 @@ function startGame() {
   createGame();
   displayGame();
   updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
-  updateWinCountDisplay();
+  displayWins();
   toggleClickOnBoard('auto');
 }
 
@@ -46,9 +46,9 @@ function updateGameHeading(message) {
   gameHeading.innerText = message;
 }
 
-function updateWinCountDisplay() {
-  player1wins.innerText = (`${game.player1.winCount} WINS`);
-  player2wins.innerText = (`${game.player2.winCount} WINS`);
+function displayWins() {
+  player1Wins.innerText = (`${game.player1.winCount} WINS`);
+  player2Wins.innerText = (`${game.player2.winCount} WINS`);
 }
 
 function toggleClickOnBoard(newValue) {
@@ -61,7 +61,6 @@ function claimSpace(event) {
     game.updateGameBoard(space.id);
     displayGame();
     checkGameStatus();
-
   }
 }
 
@@ -81,7 +80,7 @@ function winGame() {
   toggleClickOnBoard('none');
   game.saveGameBoardToPlayer(game.currentPlayer);
   updateGameHeading(`${game.currentPlayer.token} wins!`);
-  updateWinCountDisplay();
+  displayWins();
   timeOut();
 }
 
