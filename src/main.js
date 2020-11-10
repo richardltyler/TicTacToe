@@ -1,26 +1,19 @@
 var gameHeading = document.querySelector('#game-heading');
 var gameBoard = document.querySelector('.game-board');
 var gameSpaces = document.querySelectorAll('.game-space');
-var beginButton = document.querySelector('#new-game');
 var player1wins = document.querySelector('.player-one');
 var player2wins = document.querySelector('.player-two');
 var game;
 
-window.onLoad = createGame(), updateWinCountDisplay();
-beginButton.addEventListener('click', startGame);
+window.onLoad = startGame(), updateWinCountDisplay();
 gameBoard.addEventListener('click', claimSpace);
 
 function startGame() {
   createGame();
   clearBoard();
-  hideButton();
   updateGameHeading(`It's ${game.currentPlayer.token}'s turn!`);
   updateWinCountDisplay();
   toggleClickOnSpace('auto');
-}
-
-function hideButton() {
-  beginButton.className = 'inactive-button';
 }
 
 function createGame() {
