@@ -65,8 +65,8 @@ function claimSpace(event) {
 }
 
 function decideNextMove() {
-  var win = game.winGame(game.currentPlayer);
-  var draw = game.tieGame(game.currentPlayer);
+  var win = game.checkForWin(game.currentPlayer);
+  var draw = game.checkForDraw(game.currentPlayer);
   if (win) {
     winGame();
   } else if (draw) {

@@ -19,7 +19,6 @@ class Game {
 
   updateGameBoard(index) {
       this.gameBoard[index] = this.currentPlayer.token;
-      // this.toggleTurn();
   }
 
   decideFirstTurn() {
@@ -28,7 +27,7 @@ class Game {
     this.currentPlayer = players[randomIndex];
   }
 
-  winGame(player) {
+  checkForWin(player) {
     var token = player.token;
     var board = this.gameBoard;
     for (var i = 0; i < this.winningSequences.length; i++) {
@@ -39,7 +38,7 @@ class Game {
     }
   }
 
-  tieGame(player) {
+  checkForDraw(player) {
     if (!this.gameBoard.includes(null)) {
       return true;
     }
