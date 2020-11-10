@@ -27,19 +27,19 @@ class Game {
     this.currentPlayer = players[randomIndex];
   }
 
-  checkForWin(player) {
-    var token = player.token;
+  checkForWin() {
+    var token = this.currentPlayer.token;
     var board = this.gameBoard;
     for (var i = 0; i < this.winningSequences.length; i++) {
-      var space = this.winningSequences[i];
-      if (board[space[0]] === token && board[space[1]] === token && board[space[2]] === token) {
+      var order = this.winningSequences;
+      if (board[order[i][0]] === token && board[order[i][1]] === token && board[order[i][2]] === token) {
         return true;
       }
     }
   }
 
-  checkForDraw(player) {
-    if (!this.gameBoard.includes(null)) {
+  checkForDraw() {
+    if (!this.checkForWin() && !this.gameBoard.includes(null)) {
       return true;
     }
   }

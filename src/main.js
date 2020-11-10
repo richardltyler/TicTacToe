@@ -65,8 +65,8 @@ function claimSpace(event) {
 }
 
 function checkGameStatus() {
-  var win = game.checkForWin(game.currentPlayer);
-  var draw = game.checkForDraw(game.currentPlayer);
+  var win = game.checkForWin();
+  var draw = game.checkForDraw();
   if (win) {
     winGame();
   } else if (draw) {
