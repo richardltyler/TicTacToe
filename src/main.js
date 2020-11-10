@@ -1,8 +1,8 @@
 var gameHeading = document.querySelector('#game-heading');
 var gameBoard = document.querySelector('.game-board');
 var gameSpaces = document.querySelectorAll('.game-space');
-var player1Wins = document.querySelector('.player-one');
-var player2Wins = document.querySelector('.player-two');
+var player1Wins = document.querySelector('#player-one');
+var player2Wins = document.querySelector('#player-two');
 var game;
 
 window.onLoad = startGame();
