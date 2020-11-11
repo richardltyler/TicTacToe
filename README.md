@@ -64,6 +64,23 @@ If the players want to close the game and come back to it later, they can still 
     When a player wins a game, the game board is saved to the winning player. That game board is then sent to local storage. When the player class is instantiated at the beginning of each game, their wins propertys are updated with the wins stored in local storage. 
   </details>
   
+---
+  
+## Future Iterations
+ In the next iteration we hope to add:
+  * Local storage to make current game hold across refreshes
+  * Animations for game outcomes
+  * Window alerts when player tries to click on an occupied space 
+  
+---
+  
+## Reflection
+  * In the beginning, this project posed an overwhelming challenge to my understanding of the DOM and Data Model. However, after putting some of the pieces together, I now see a distinct difference between the two and the importance of keeping them seperate. 
+  * I tried to create this project using only my current knowledge/skill-level whenever possible. Figuring out how to win/tie the game and display on the DOM from the Data Model with only my current knowledge was very satisfying. 
+  * The challenge that I did not meet was for the gameboard to persist across refreshes. If given more time, that would be the first thing I do. 
+
+---
+  
 ## Technologies
 JS, HTML, & CSS
 
