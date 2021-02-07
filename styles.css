@@ -1,5 +1,6 @@
 /* body section */
 body {
+  /* padding-top: 1rem; */
   display: flex;
   background: #22333B;
   flex-direction: row;
@@ -12,30 +13,23 @@ body {
 }
 
 .heading {
-  margin-top: 4em;
   text-align: center;
   height: 1em;
   width: 7em;
+  margin-bottom: 1rem;
 }
 
 /* game section */
-.active-button {
-  background: #22333B;
-  color: white;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
 .game-area {
-  background: #FFDAE0;
+  background: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  wrap: auto;
   height: 100vh;
   width: 50%;
   color: #22333B;
+  padding-top: 3rem;
 }
 
 .game-board {
@@ -47,13 +41,13 @@ body {
   flex-wrap: wrap;
   height: 34em;
   width: 92%;
-  margin-top: 4%;
+  margin-top: 6rem;
   margin-bottom: 1%;
   pointer-events: auto;
 }
 
  .game-space {
-  background: #FFDAE0;
+  background: white;
   height: 32.3%;
   width: 32.3%;
   display: flex;
@@ -73,12 +67,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  padding-top: 3rem;
   width: 25%;
   font-family: "Open Sans", sans-serif;
   color: #C03221;
+  font-size: 2rem;
 }
 
 .player-wins {
-  margin-top: -0.5em;
+  /* margin-top: -0.5em; */
+  margin: 0;
 }
